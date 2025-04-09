@@ -182,20 +182,69 @@ with open('notes.txt', 'r', encoding='utf-8') as file:
 
 # Дополнительные задания
 # Калькулятор: пользователь вводит два числа и операцию (+, -, *, /), программа выводит результат.
-def calc(a, b, operation):
-    if operation == '+':
-        return f'{a} + {b} = {a + b}'
-    elif operation == '-':
-        return f'{a} - {b} = {a - b}'
-    elif operation == '*':
-        return f'{a} * {b} = {a * b}'
-    elif operation == '/':
-        if b == 0:
-            return 'Ошибка: деление на ноль!'
-        return f'{a} / {b} = {a / b}'
+# def calc(a, b, operation):
+#     if operation == '+':
+#         return f'{a} + {b} = {a + b}'
+#     elif operation == '-':
+#         return f'{a} - {b} = {a - b}'
+#     elif operation == '*':
+#         return f'{a} * {b} = {a * b}'
+#     elif operation == '/':
+#         if b == 0:
+#             return 'Ошибка: деление на ноль!'
+#         return f'{a} / {b} = {a / b}'
+#     else:
+#         return 'Неизвестная операция!'
+#
+#
+# operation = input('Введите операцию(+,-,*,/): ')
+# print(calc(8, 2, operation))
+
+# Задача: Простой парсер текста на Python
+text = 'Привет, мир! Это тестовый текст. Текст содержит несколько предложений. Привет еще раз.'
+words = []
+current_word = ''
+for char in text:
+    if char.isalpha():
+        current_word += char.lower()
     else:
-        return 'Неизвестная операция!'
+        if current_word:
+            words.append(current_word)
+            current_word = ''
+if current_word:
+    words.append(current_word)
 
+count_word = len(words)
+unic_word = len(set(words))
 
-operation = input('Введите операцию(+,-,*,/): ')
-print(calc(8, 2, operation))
+count_symbol = len(text)
+excluding_spaces = sum(1 for char in text if not char.isspace())
+
+sentences = 0
+for char in text:
+    if char in '.!?':
+        sentences += 1
+
+word_counts = []
+unique_words = list(set(words))
+
+for word in unique_words:
+    count = 0
+    for w in words:
+        if w == word:
+            count += 1
+    word_counts.append((count, word))
+
+word_counts.sort(reverse=True)
+
+top_words = word_counts[:3]
+
+print(f'Статистика текста:')
+print(f'- Количество слов: {count_word}')
+print(f'- Количество символов (с пробелами): {count_symbol}')
+print(f'- Количество символов (без пробелов): {excluding_spaces}')
+print(f'- Количество предложений: {sentences}')
+print(f'- Количество уникальных слов: {unic_word}')
+print('- Топ-3 слов:')
+for i, (count, word) in enumerate(top_words, 1):
+    print(f'  {i}. {word} - {count} раз' + ('а' if count > 1 else ''))
