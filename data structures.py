@@ -138,10 +138,10 @@ pairs = [(x, y) for x in [1, 2, 3] for y in [3, 1, 4] if x != y]
 # [(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)]
 
 # Создайте список первых 10 кубов чисел
-print([x**3 for x in range(1,11)])
+print([x ** 3 for x in range(1, 11)])
 # Создайте словарь, где ключи - числа от 1 до 5, а значения - их факториалы
-s = [s for s in range(1,6)]
-print({s:s*s*s for s in s})
+s = [s for s in range(1, 6)]
+print({s: s * s * s for s in s})
 # Отфильтруйте список слов, оставив только те, что начинаются с буквы 'a'
 words = ["apple", "banana", "avocado", "cherry"]
 new_words = [s for s in words if s.startswith('a')]
@@ -150,3 +150,90 @@ print(new_words)
 words = ["cat", "dog", "elephant", "fox"]
 new_words = {s: len(s) for s in words if len(s) > 3}
 print(new_words)
+
+numbers = [1, 2, 3]
+iterator = iter(numbers)
+print(next(iterator))
+print(next(iterator))
+print(next(iterator))
+
+
+def count_up_to(max_num):
+    current = 1
+    while current <= max_num:
+        yield current
+        current += 1
+
+
+counter = count_up_to(3)
+print(next(counter))
+print(next(counter))
+print(next(counter))
+
+squares = (x ** 2 for x in range(5))  # генераторное выражение
+
+print(next(squares))
+print(next(squares))
+print(next(squares))
+
+
+def fibonacci():
+    a, b = 0, 1
+    while True:
+        yield a
+        a, b = b, a + b
+
+
+fib = fibonacci()
+print(next(fib))  # 0
+print(next(fib))  # 1
+print(next(fib))  # 1
+print(next(fib))  # 2
+
+# Напишите код, который создаёт итератор из списка строк и выводит каждый элемент по очереди с помощью next().
+fruits = ["apple", "banana", "cherry"]
+iter_fruits = iter(fruits)
+print(next(iter_fruits))
+print(next(iter_fruits))
+
+
+# Создайте генератор even_numbers(n), который возвращает чётные числа от 0 до n (включительно).
+def even_numbers(n):
+    for num in range(0, n + 1, 2):
+        yield num
+
+
+for num in even_numbers(5):
+    print(num)
+
+print()
+
+# Напишите генератор random_numbers(count, max_num), который генерирует count случайных чисел от 0 до max_num.
+import random
+
+
+def random_numbers(count, max_num):
+    for _ in range(count):
+        yield random.randint(0, max_num)
+
+
+for num in random_numbers(3, 10):
+    print(num)
+
+print()
+# Создайте итератор из списка чисел, который останавливается, когда встречает число -1.
+numbers = [2, 4, 6, -1, 8, 10]
+iterator = iter(lambda i=iter(numbers): next(i), -1)
+for num in iterator:
+    print(num)
+
+
+# Напишите генератор read_lines(filename), который построчно читает файл и возвращает строки без символа \n.
+def read_lines(filename):
+    with open(filename, 'r', encoding='utf-8') as f:
+        for line in f:
+            yield line.rstrip('\n')
+
+
+for line in read_lines("notes.txt"):
+    print(line)
