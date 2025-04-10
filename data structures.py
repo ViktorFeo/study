@@ -127,11 +127,26 @@ new_words = list(filter(lambda x: x.startswith('a'), words))
 print(new_words)
 # Возведите все числа в квадрат и оставьте только чётные результаты.
 numbers = [1, 2, 3, 4, 5, 6]
-new_numbers = list(map(lambda x: x ** 2, numbers))
-new_numbers = list(filter(lambda x: x % 2 == 0, new_numbers))
+new_numbers = list(map(lambda x: x ** 2, filter(lambda x: x % 2 == 0, numbers)))
 print(new_numbers)
 # Из списка строк выберите те, длина которых >3, и преобразуйте их в верхний регистр.
 words = ["cat", "dog", "elephant", "fox"]
-new_words = list(filter(lambda x: len(x) > 3, words))
-new_words = list(map(lambda x: x.upper(), new_words))
+new_words = list(map(lambda x: x.upper(), filter(lambda x: len(x) > 3, words)))
+print(new_words)
+
+pairs = [(x, y) for x in [1, 2, 3] for y in [3, 1, 4] if x != y]
+# [(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)]
+
+# Создайте список первых 10 кубов чисел
+print([x**3 for x in range(1,11)])
+# Создайте словарь, где ключи - числа от 1 до 5, а значения - их факториалы
+s = [s for s in range(1,6)]
+print({s:s*s*s for s in s})
+# Отфильтруйте список слов, оставив только те, что начинаются с буквы 'a'
+words = ["apple", "banana", "avocado", "cherry"]
+new_words = [s for s in words if s.startswith('a')]
+print(new_words)
+# Создайте словарь из списка строк, где ключ - строка, а значение - ее длина, но только для строк длиннее 3 символов
+words = ["cat", "dog", "elephant", "fox"]
+new_words = {s: len(s) for s in words if len(s) > 3}
 print(new_words)
