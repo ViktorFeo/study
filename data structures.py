@@ -12,6 +12,7 @@
 Практика:
 Проект: Парсинг CSV/JSON (например, анализ данных о погоде)
 """
+from os import write
 
 
 # 2.1 Списки, кортежи, множества, словари
@@ -237,3 +238,47 @@ def read_lines(filename):
 
 for line in read_lines("notes.txt"):
     print(line)
+
+import csv
+
+with open('import_ou_csv.csv', 'r', encoding='utf-8') as file:
+    csv_reader = csv.reader(file)
+    for row in csv_reader:
+        print(row)
+
+data = [
+    ['Name', 'Age', 'City'],
+    ['Alice', 25, 'New York'],
+    ['Bob', 30, 'London'],
+    ['Charlie', 35, 'Paris'],
+    ['Viktor', 34, 'Feodosiya']
+]
+
+with open('import_ou_csv.csv', 'w', encoding='utf-8', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerows(data)
+
+import json
+
+
+data = {
+    'name': 'Petra',
+    'age': 27,
+    'city': 'Brandish',
+    'hobbies': ['reading', 'hiking']
+}
+
+
+
+with open('data.json', 'w', encoding='utf-8') as file:
+    json.dump(data, file, indent=2, ensure_ascii=False)
+
+with open('output.json', 'r', encoding='utf-8') as file:
+    data = json.load(file)
+    for k,v in data.items():
+        print(f'my {k} is {v}')
+
+with open('data.json', 'r', encoding='utf-8') as file:
+    data = json.load(file)
+    for k,v in data.items():
+        print(f'my {k} is {v}')
