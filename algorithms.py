@@ -1,3 +1,6 @@
+from os.path import devnull
+
+
 def linear_search(lst, target):  # Передаем список и искомое число
     for i in range(len(lst)):  # Перебор индексов списка
         if lst[i] == target:  # Если элемент под индексом i == искомому числу
@@ -130,6 +133,7 @@ def find_last(arr, target):
 
 print(binary_search([1, 2, 3, 3, 3, 3, 3, 3, 4, 5], 3))  # (2, 7)
 
+
 # Сортировка пузырьком
 def bubble_sort(arr):
     n = len(arr)
@@ -149,4 +153,102 @@ arr = [64, 34, 25, 12, 22, 11, 90]
 sorted_arr = bubble_sort(arr)
 print("Отсортированный массив:", sorted_arr)
 
+
 # Рекурсия
+def countdown(x):
+    if x == 0:  # Базовый случай, останавливает рекурсию
+        print('Поехали')
+    else:
+        print(x)
+        countdown(x - 1)  # Рекурсивный вызов
+
+
+countdown(5)
+
+
+def fact(n):
+    if n == 1:  # Базовый случай
+        return 1
+    else:
+        return n * fact(n - 1)  # Рекурсивный вызов
+
+
+print(fact(5))
+
+
+# Напиши рекурсивную функцию, которая выводит числа Фибоначчи.
+def fibo(n):
+    if n <= 1:
+        return n
+    else:
+        return fibo(n - 1) + fibo(n - 2)
+
+
+print(fibo(6))
+
+
+# Сумма чисел от 1 до N
+def summ(n):
+    if n <= 1:
+        return 1
+    else:
+        return n + summ(n - 1)
+
+
+print(summ(5))
+
+
+# Напишите рекурсивную функцию power(a, b), которая возвращает a в степени b
+def power(a, b):
+    if b == 0:
+        return 1
+    else:
+        return a * power(a, b - 1)
+
+
+print(power(2, 3))
+
+
+# Напишите рекурсивную функцию, которая возвращает сумму цифр числа.
+def summa(n):
+    if len(str(n)) == 1:
+        return n
+    else:
+        return summa(n % 10) + summa(n // 10)
+
+
+print(summa(1234))
+
+
+# Напишите рекурсивную функцию, которая проверяет, является ли строка палиндромом.
+def pal(word):
+    if len(word) <= 1:
+        return True
+    if word[0] != word[-1]:
+        return False
+    return pal(word[1:-1])
+
+
+print(pal('racecar'))
+
+
+# Напишите рекурсивную функцию, которая разворачивает строку.
+def invert(word):
+    if len(word) <= 1:
+        return word
+    else:
+        return invert(word[1:]) + word[0]
+
+
+print(invert('hello'))
+
+
+# Напишите рекурсивную функцию для нахождения наибольшего общего делителя (НОД) двух чисел
+def divider(a, b):
+    if b == 0:
+        return a
+    else:
+        return divider(b, a % b)
+
+
+print(divider(48, 18))
