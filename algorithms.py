@@ -148,3 +148,5 @@ def bubble_sort(arr):
 arr = [64, 34, 25, 12, 22, 11, 90]
 sorted_arr = bubble_sort(arr)
 print("Отсортированный массив:", sorted_arr)
+
+# Рекурсия
