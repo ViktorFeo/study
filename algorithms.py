@@ -251,4 +251,14 @@ def divider(a, b):
         return divider(b, a % b)
 
 
-print(divider(48, 18))
+print(f'НОД: {divider(48, 18)}')
+
+# Написать рекурсивную функцию, которая считает количество элементов в списке.\
+def count_elements(lst):
+    if not lst:
+        return 0
+    else:
+        print(lst)
+        return 1 + count_elements(lst[1::])
+
+print(count_elements([1, 2, 3, 4]))
