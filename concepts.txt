@@ -73,12 +73,51 @@ def send_email(to: str, subject: str, body: str) -> bool:
 IDE подсказывает типы,
 Используется в современном Django.
 
+Для работы с файлами используется функция open():
+file = open("example.txt", "r")  # Открытие файла для чтения
+content = file.read()           # Чтение содержимого
+file.close()                    # Закрытие файла (важно!)
+Проблема: Если забыть close(), файл останется заблокированным.
+Решение: Контекстный менеджер (with):
+with open("example.txt", "r") as file:
+    content = file.read()
+Режимы открытия файлов
 
+"r"	Чтение (по умолчанию). Ошибка, если файл не существует.
+"w"	Запись. Перезаписывает файл, если он существует. Создаёт, если нет.
+"a"	Дозапись в конец файла. Создаёт файл, если нет.
+"r+" Чтение и запись. Курсор в начале файла.
+"w+" Чтение и запись. Перезаписывает файл.
+"a+" Чтение и дозапись. Курсор в конце файла.
 
+Способы чтения:
+file.read() — читает весь файл в одну строку.
+file.readline() — читает одну строку.
+file.readlines() — возвращает список строк.
+with open("data.txt", "r") as file:
+    for line in file:              # Читаем файл построчно
+        print(line.strip())       # .strip() удаляет \n в конце
 
+Всегда указывайте кодировку (особенно для русского текста):
+with open("file.txt", "r", encoding="utf-8") as file:
+    content = file.read()
 
+Всегда обрабатывайте возможные ошибки:
+try:
+    with open("missing_file.txt", "r") as file:
+        content = file.read()
+except FileNotFoundError:
+    print("Файл не найден!")
+except IOError as e:
+    print(f"Ошибка ввода/вывода: {e}")
 
+функция, которая записывает содержимое двух файлов в третий
+def merge_files(file1_path, file2_path, output_path):
+    with open(file1_path, "r") as file1, open(file2_path, "r") as file2:
+        content = file1.read() + "\n" + file2.read()
 
+    with open(output_path, "w") as out_file:
+        out_file.write(content)
 
 Объектно-Ориентированное Программирование — это способ организации кода вокруг объектов
 Класс — это шаблон для создания объектов.
